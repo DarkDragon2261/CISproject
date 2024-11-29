@@ -1,5 +1,7 @@
 import { FormEvent, useState } from "react";
+import { FaBowlingBall } from "react-icons/fa";
 import supabase from '../../supabaseClient.ts';
+import {Link} from 'react-router-dom';
 import './signupStyles.css';
 
 
@@ -7,9 +9,7 @@ function Signup () {
 
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
-    const[creditcard, setCreditCard] = useState('');
-    const[socialSecurity, setSocialSecurity] = useState('');
-
+    const[fullName, setfullName] = useState('');
     const[error, setError] = useState('');
     const[message,setMessage] = useState('');
 
@@ -20,7 +20,14 @@ function Signup () {
         
         const {user, error } = await supabase.auth.signUp({
             email, 
-            password})
+            password,
+            options: {
+                data: {
+                    password: {password},
+                    fullname: (fullName)
+                }
+            }
+            })
         if (error) {
             setMessage('error');
         }
@@ -33,11 +40,21 @@ function Signup () {
     return (
         <div className="background">
             <div className="bowlingdisplay">
-                HFHEJFBEJBFJEBFJEBFJEBFJE
+                <div className="orangesquare">
+                    THE BOWLING PIN
+                </div>
+                <div>
+                    <FaBowlingBall className="bowlingicon"></FaBowlingBall>
+                </div>
             </div>
             <div className="signup">
-                <form onSubmit={handleSignup}>
+                <h1 className="createaccount">Create an Account</h1>
+               <div className="login">
+                    Already Registered? <Link to = '/login'> Login Here!</Link>
+               </div>
+                <form className = "form" onSubmit={handleSignup}>
                     <input
+                    className="input"
                     type = "email"
                     placeholder="Enter Email"
                     value = {email}
@@ -46,13 +63,22 @@ function Signup () {
                     </input>
 
                     <input
+                    className="input"
                     type = "password "
                     placeholder="Enter password"
                     value = {password}
                     onChange = {(e) => setPassword(e.target.value)}>
                     </input>
 
-                    <button type = "submit" > Submit!</button>
+                    <input
+                    className="input"
+                    type = "fullname "
+                    placeholder="Enter Full Name"
+                    value = {fullName}
+                    onChange = {(e) => setfullName(e.target.value)}>
+                    </input>
+
+                    <button type = "submit" style={{backgroundColor: "#f7c59f"}} > Submit!</button>
                 </form>
             </div>
             </div>
