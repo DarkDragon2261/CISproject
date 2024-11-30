@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
 import supabase from '../../supabaseClient.ts';
 import { useNavigate } from "react-router-dom";
+import './loginStyles.css';
 
 
 function Login () {
@@ -26,28 +27,32 @@ function Login () {
     }
 
     return (
-        <div>
-            <form onSubmit = {LoginHandler}>
-            <input
-                    className="input"
-                    type = "email"
-                    placeholder="Enter Email"
-                    value = {email}
-                    onChange = {(e) => setEmail(e.target.value)}
-                    >
-                    </input>
+        <div className="background">
+           <div className="header"> Welcome Back! Login Here</div>
+             <div className="formcontainer">
+                <form onSubmit = {LoginHandler} className="form">
+                <input
+                        className="input"
+                        type = "email"
+                        placeholder="Enter Email"
+                        value = {email}
+                        onChange = {(e) => setEmail(e.target.value)}
+                        >
+                        </input>
 
-                    <input
-                    className="input"
-                    type = "password "
-                    placeholder="Enter password"
-                    value = {password}
-                    onChange = {(e) => setPassword(e.target.value)}>
-                    </input>
-                <button type = "submit">Submit</button>    
-            </form>
-            <div>{message}</div>
+                        <input
+                        className="input"
+                        type = "password "
+                        placeholder="Enter password"
+                        value = {password}
+                        onChange = {(e) => setPassword(e.target.value)}>
+                        </input>
+                    <button type = "submit" className="button" >Submit</button>    
+                </form>
+                <div>{message}</div>
+            </div>
         </div>
+       
     )
 }
 
