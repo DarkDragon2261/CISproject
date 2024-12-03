@@ -27,9 +27,16 @@ function Login () {
         }
     }
 
+    const handleClick = () => {
+        Navigate('/SecQuestions');
+    }
+
     return (
         <div className="backgroundlogin">
            <div className="header"> Welcome Back! Login Here</div>
+           <div>
+            <button onClick={handleClick}>Forgot Password?</button>
+           </div>
              <div className="formcontainer">
                 <form onSubmit = {LoginHandler} className="loginform">
                 <input
