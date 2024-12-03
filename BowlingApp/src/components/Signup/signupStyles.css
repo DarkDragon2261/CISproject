@@ -3,7 +3,7 @@
 
 .background {
     display: flex;
-    flex-direction: row ;
+    flex-direction: row;
     width: 100vw;
     height: 100vh;
 }
@@ -62,10 +62,11 @@ a :hover {
     color: blue
 }
 
-.form {
+.signupform {
   display: flex;
   gap: 20px;
   flex-direction: column;
+  gap: 20px;
   border-radius: 15px;
   margin:10px;
 }
@@ -76,3 +77,8 @@ a :hover {
     text-align: center;
 }
 
+.passbutton {
+    background-color: #2a324b;
+    font-family: 'Rajdhani', sans-serif ;
+    color: aliceblue;
+}

@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
 import supabase from '../../supabaseClient.ts';
 import { useNavigate } from "react-router-dom";
+import { GiBowlingPin } from "react-icons/gi";
 import './loginStyles.css';
 
 
@@ -27,10 +28,10 @@ function Login () {
     }
 
     return (
-        <div className="background">
+        <div className="backgroundlogin">
            <div className="header"> Welcome Back! Login Here</div>
              <div className="formcontainer">
-                <form onSubmit = {LoginHandler} className="form">
+                <form onSubmit = {LoginHandler} className="loginform">
                 <input
                         className="input"
                         type = "email"
@@ -51,6 +52,9 @@ function Login () {
                 </form>
                 <div>{message}</div>
             </div>
+            <div className="bowlingpincontainer">
+                <GiBowlingPin size={"20em"}></GiBowlingPin>
+             </div>
         </div>
        
     )
