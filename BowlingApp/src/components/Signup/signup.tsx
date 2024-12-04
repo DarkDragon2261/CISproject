@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import './signupStyles.css';
 import { passBuilder } from "./passwordBuilder";
 import { useNavigate } from "react-router-dom";
+import { ValidateMediator } from "./validateMediator.ts";
 
 
 function Signup() {
@@ -17,16 +18,15 @@ function Signup() {
     const [security3, setSecurity3] = useState('');
     const navigate = useNavigate();
 
-    const [error, setError] = useState('');
     const [message, setMessage] = useState('');
 
 
-    
+    const  [warningmessage, setWarning] = useState('');
 
     const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-
+       
         const { data, error } = await supabase
         .from('Users')
         .upsert({
@@ -54,10 +54,11 @@ function Signup() {
         }
 
         else {
+            setWarning(ValidateMediator(fullName, password, security1, security2, security3));
             setMessage('Successfully Created an Account!');
             setTimeout(() => {
                 navigate('/Login');
-            }, 1000); 
+            }, 10000); 
         }
     };
 
@@ -131,11 +132,12 @@ function Signup() {
                         onChange={(e) => setSecurity3(e.target.value)}>
                     </input>
 
-                    <button onClick={handlePassGenerate} className="passbutton">Generate Strong Password?</button>
+                    <button type ="button" className="passbutton" onClick={handlePassGenerate}>Generate Strong Password?</button>
                     <button type="submit" style={{ backgroundColor: "#f7c59f" }} > Submit!</button>
                 </form>
+                <div className="warningmessage">{warningmessage}</div>
             </div>
-            <div>{message}</div>
+           
         </div>
 
     )

@@ -1,6 +1,6 @@
 import { SecurityResponse } from "./SecurityCommandChain";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import './SecurityStyles.css';
 
 function SecurityQuestions () {
@@ -22,7 +22,7 @@ function SecurityQuestions () {
        
         if (isValid) {
           setMessage('Success! You answered a valid security question.');
-          nav('/profile');
+          nav('/profile' , { state: {email} });
 
         } else {
           setMessage('Error: Invalid answers or no match found.');
@@ -33,7 +33,7 @@ function SecurityQuestions () {
             <div className="h1">Forgot your password? No problem! Answer at least one of these security questions!</div>
             <form onSubmit={handleSubmit} className="SecurityForm">
             <input
-                        className="input"
+                        className="inputSec"
                         type="security1"
                         placeholder="What is your mother's maiden name?"
                         value={rep1}
@@ -41,7 +41,7 @@ function SecurityQuestions () {
                     </input>
 
                     <input
-                        className="input"
+                        className="inputSec"
                         type="security2"
                         placeholder="What is your favorite color?"
                         value={rep2}
@@ -49,14 +49,14 @@ function SecurityQuestions () {
                     </input>
 
                     <input
-                        className="input"
+                        className="inputSec"
                         type="security3"
                         placeholder="What is your favorite food?"
                         value={rep3}
                         onChange={(e) => setrep3(e.target.value)}>
                     </input>
                     <input
-                        className="input"
+                        className="inputSec"
                         type="email"
                         placeholder="What is your email?"
                         value={email}

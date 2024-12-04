@@ -25,10 +25,18 @@ abstract class ResponseHandler {
 
 class ResponseHandler1 extends ResponseHandler {
   async HandleResponse(responses: UserResponses): Promise<boolean> {
-    const result = await supabaseResponse(responses.response1, responses.userEmail);
-    if (result === true) {
-      return true;
-    } else if (this.Successor != null) {
+   const {data, error} = await supabase 
+    .from('Users')
+    .select('Security1')
+    .eq('Email', responses.userEmail)
+    
+    if (data) {
+      const responseSupa = data[0].Security1;
+      if (responses.response1 === responseSupa) {
+          return true;
+      }
+    }
+   else if (this.Successor != null) {
       return this.Successor.HandleResponse(responses);
     }
     return false;
@@ -37,10 +45,18 @@ class ResponseHandler1 extends ResponseHandler {
 
 class ResponseHandler2 extends ResponseHandler {
   async HandleResponse(responses: UserResponses): Promise<boolean> {
-    const result = await supabaseResponse(responses.response2, responses.userEmail);
-    if (result === true) {
-      return true;
-    } else if (this.Successor != null) {
+   const {data, error} = await supabase 
+    .from('Users')
+    .select('Security2')
+    .eq('Email', responses.userEmail)
+    
+    if (data) {
+      const responseSupa = data[0].Security2;
+      if (responses.response2 === responseSupa) {
+          return true;
+      }
+    }
+   else if (this.Successor != null) {
       return this.Successor.HandleResponse(responses);
     }
     return false;
@@ -49,34 +65,24 @@ class ResponseHandler2 extends ResponseHandler {
 
 class ResponseHandler3 extends ResponseHandler {
   async HandleResponse(responses: UserResponses): Promise<boolean> {
-    const result = await supabaseResponse(responses.response3, responses.userEmail);
-    if (result === true) {
-      return true;
-    } else if (this.Successor != null) {
+   const {data, error} = await supabase 
+    .from('Users')
+    .select('Security3')
+    .eq('Email', responses.userEmail)
+    
+    if (data) {
+      const responseSupa = data[0].Security3;
+      if (responses.response3 === responseSupa) {
+          return true;
+      }
+    }
+   else if (this.Successor != null) {
       return this.Successor.HandleResponse(responses);
     }
     return false;
   }
 }
 
-const supabaseResponse = async (securityquestion: string, useremail: string): Promise<boolean> => {
-  const { data, error } = await supabase
-    .from('Users')
-    .select('Security1')
-    .eq('Email', useremail);
-
-  if (error) {
-    console.error("Error fetching data:", error);
-    return false;
-  }
-
-  if (data && data.length > 0) {
-    const storedAnswer = data[0].Security1;
-    return storedAnswer === securityquestion;
-  }
-
-  return false;
-}
 
 function SecurityResponse(user: string, rep1: string, rep2: string, rep3: string): Promise<boolean> {
   let responses: UserResponses = new UserResponses(rep1, rep2, rep3, user);

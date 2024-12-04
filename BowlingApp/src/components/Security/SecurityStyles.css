@@ -16,11 +16,20 @@
 .SecurityForm {
     display: flex;
     flex-direction: column;
-    margin: 10px;
+    margin-bottom: 20px;
 }
 
 
 .buttonSec {
     background-color: #2a324b;
     color:white;
+    margin: 10px;
+}
+
+
+.inputSec {
+    font-family: 'Rajdhani', sans-serif ;
+    font-size: 20px;
+    text-align: center;
+    margin: 10px;;
 }

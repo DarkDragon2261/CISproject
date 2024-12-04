@@ -82,3 +82,8 @@ a :hover {
     font-family: 'Rajdhani', sans-serif ;
     color: aliceblue;
 }
+
+.warningmessage {
+    font-family: 'Rajdhani', sans-serif;
+    color: white;
+}
