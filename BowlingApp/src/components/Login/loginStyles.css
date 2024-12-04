@@ -28,15 +28,30 @@
 
 .input {
     border-radius: 15px;
-    gap: 10px
+    gap: 10px;
+    margin-left: 5px;
 }
 
-.button {
-    color: #2a324b;
+.loginbutton {
+    margin-left: 5px;
+    background-color: #2a324b;
+    color:white
 }
 
 .bowlingpincontainer {
     margin: 50px;
     display: flex;
     justify-content: center;
+}
+
+.Forgot {
+   font-family: 'Rajdhani', sans-serif;
+   display: flex;
+   justify-content: center;
+   margin-bottom: 10px;
+   font-size: 20px;
+}
+
+.Link {
+    color: black;
 }

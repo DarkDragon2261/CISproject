@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import supabase from '../../supabaseClient.ts';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { GiBowlingPin } from "react-icons/gi";
 import './loginStyles.css';
 
@@ -15,27 +15,32 @@ function Login () {
     const LoginHandler = async(e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const {error, data} = await supabase.auth.signInWithPassword({email, password});
-
+        const {error, data} = await supabase
+        .from('Users')
+        .select('Password')
+        .eq('Email', email)
+        
         if (error) {
             setMessage('Didnt work');
         }
 
-        else if (data.user) {
-            setMessage('Success!');
-            Navigate('/profile');
+        else if (data) {
+            const retreivedata = data[0].Password;
+            if (password === retreivedata) {
+                setMessage('Success!');
+                Navigate('/profile' , { state: {email} });
+            }
+            
         }
     }
 
-    const handleClick = () => {
-        Navigate('/SecQuestions');
-    }
+ 
 
     return (
         <div className="backgroundlogin">
            <div className="header"> Welcome Back! Login Here</div>
-           <div>
-            <button onClick={handleClick}>Forgot Password?</button>
+           <div className="Forgot">
+            Forgot Password? <Link to ='/SecQuestions' className="Link">Click Here!</Link>
            </div>
              <div className="formcontainer">
                 <form onSubmit = {LoginHandler} className="loginform">
@@ -55,7 +60,7 @@ function Login () {
                         value = {password}
                         onChange = {(e) => setPassword(e.target.value)}>
                         </input>
-                    <button type = "submit" className="button" >Submit</button>    
+                    <button type = "submit" className="loginbutton" >Submit</button>    
                 </form>
                 <div>{message}</div>
             </div>

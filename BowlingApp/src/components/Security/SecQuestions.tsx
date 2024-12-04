@@ -1,6 +1,7 @@
 import { SecurityResponse } from "./SecurityCommandChain";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import './SecurityStyles.css';
 
 function SecurityQuestions () {
     const [email, setEmail] = useState('');
@@ -28,9 +29,9 @@ function SecurityQuestions () {
         }
       };
     return (
-        <div>
-            <h1>Forgot your password? No problem! Answer at least one of these security questions!</h1>
-            <form onSubmit={handleSubmit}>
+        <div className="SecurityBackground">
+            <div className="h1">Forgot your password? No problem! Answer at least one of these security questions!</div>
+            <form onSubmit={handleSubmit} className="SecurityForm">
             <input
                         className="input"
                         type="security1"
@@ -61,7 +62,7 @@ function SecurityQuestions () {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}>
                     </input>
-                    <button type = "submit"></button>
+                    <button type = "submit" className="buttonSec">Submit</button>
             </form>
             <div>{message}</div>
         </div>
